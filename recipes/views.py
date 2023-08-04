@@ -61,14 +61,13 @@ class RecipeDetail(DetailView):
 
 @login_required
 def save_post(request, post_id):
-    post_id = request.POST.get('post_id')
     post = Recipe.objects.get(pk=post_id)
     saved_post, created = SavedPost.objects.get_or_create(user=request.user, post=post)
 
     if not created:
         saved_post.delete()
 
-    return redirect('recipe_detail', post_id=post_id)
+    return redirect('recipe_detail', post_id)
 
 
 class CategoryDetail(DetailView):
