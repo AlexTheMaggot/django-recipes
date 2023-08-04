@@ -1,0 +1,11 @@
+{% extends 'recipes/base.html' %}
+{% block content %}
+
+<button type="button" class="btn btn-primary" onclick="location.href='{% url 'home' %}'"> Back</button>
+<p>{{recipe}}</p>
+<p>Сooking time: {{recipe.time_to_cook}}</p>
+<p>{{recipe.description}}</p>
+<img src="{{ recipe.photo.url }}" class="center"/>
+<p>{{recipe.ingredients}}</p>
+<p>{{recipe.directions}}</p>
+{% endblock %}

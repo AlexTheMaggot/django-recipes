@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html>
+<title>Home</title>
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<link rel="stylesheet" href="css/style.css">
+<link rel="stylesheet" href="https://www.w3schools.com/w3css/4/w3.css">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Edu+SA+Beginner:wght@600&family=Josefin+Sans:wght@700&family=Nunito:ital,wght@1,200&family=Quicksand&display=swap" rel="stylesheet">
+<body>
+<div class="w3-sidebar w3-bar-block w3-card w3-animate-left" style="display:none" id="mySidebar">
+  <button class="w3-bar-item w3-button w3-large"
+  onclick="w3_close()">Close &times;</button>
+  <p><a href="{% url 'home' %}">All menu</a></p>
+    {% for c in cats %}
+  <p><a href="{% url 'category' c.pk%}">{{c}}</a></p>
+{% endfor %}
+</div>
+
+<div id="main">
+
+<div class="w3-teal">
+  <button id="openNav" class="w3-button w3-teal w3-xlarge" onclick="w3_open()">&#9776;</button>
+  {% if user.is_authenticated %}
+  <button type="button" class="log" onclick="location.href='{% url 'logout' %}'"> Logout</button>
+  {% else %}
+  <button type="button" class="log" onclick="location.href='{% url 'login' %}'"> Login</button>
+  {% endif %}
+  <button type="button" class="reg" onclick="location.href='{% url 'register' %}'"> Register</button>
+  <div class="w3-container">
+    <h1>CulinaryQuests</h1>
+  </div>
+</div>
+
+<div class="w3-container">
+{% block content%}
+    {% endblock%}
+</div>
+
+</div>
+
+<script>function w3_open() {
+  document.getElementById("main").style.marginLeft = "25%";
+  document.getElementById("mySidebar").style.width = "25%";
+  document.getElementById("mySidebar").style.display = "block";
+  document.getElementById("openNav").style.display = 'none';
+}
+function w3_close() {
+  document.getElementById("main").style.marginLeft = "0%";
+  document.getElementById("mySidebar").style.display = "none";
+  document.getElementById("openNav").style.display = "inline-block";
+}</script>
+
+</body>
+</html>
